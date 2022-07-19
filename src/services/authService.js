@@ -1,33 +1,25 @@
 import * as tokenService from './tokenService'
-import { addPhoto as addProfilePhoto } from './profileService'
-const BASE_URL = `${process.env.REACT_APP_BACK_END_SERVER_URL}/api/auth`
+const BASE_URL = `${process.env.REACT_APP_BACKEND_SERVER_URL}/api/auth`
 
-async function signup(user, photo) {
+async function signup(user) {
   try {
     const res = await fetch(`${BASE_URL}/signup`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(user),
     })
     const json = await res.json()
+    if (json.token) {
+      tokenService.setToken(json.token)
+    }
     if (json.err) {
       throw new Error(json.err)
-    } else if (json.token) {
-      tokenService.setToken(json.token)
-      if (photo) {
-        const photoData = new FormData()
-        photoData.append('photo', photo)
-        return await addProfilePhoto(
-          photoData,
-          tokenService.getUserFromToken().profile
-        )
-      }
     }
   } catch (err) {
     throw err
   }
 }
-
+ 
 function getUser() {
   return tokenService.getUserFromToken()
 }
@@ -40,7 +32,7 @@ async function login(credentials) {
   try {
     const res = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: new Headers({ 'Content-Type': 'application/json' }),
       body: JSON.stringify(credentials),
     })
     const json = await res.json()
@@ -59,10 +51,10 @@ async function changePassword(credentials) {
   try {
     const res = await fetch(`${BASE_URL}/changePassword`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${tokenService.getToken()}`,
-      },
+      headers: new Headers({ 
+        'Content-Type': 'application/json', 
+        Authorization: `Bearer ${tokenService.getToken()}` 
+      }),
       body: JSON.stringify(credentials),
     })
     const json = await res.json()
@@ -73,7 +65,7 @@ async function changePassword(credentials) {
     if (json.err) {
       throw new Error(json.err)
     }
-  } catch (err) {
+  } catch(err) {
     throw err
   }
 }
