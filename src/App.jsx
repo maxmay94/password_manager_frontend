@@ -23,7 +23,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <div className='bg-slate-500 h-screen'>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
@@ -50,7 +50,7 @@ const App = () => {
           }
         />
       </Routes>
-    </>
+    </div>
   )
 }
 
