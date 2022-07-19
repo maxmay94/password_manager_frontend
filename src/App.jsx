@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import Signup from './pages/Signup/Signup'
@@ -7,16 +7,27 @@ import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
+import * as passService from './services/passService'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
+  const [passwords, setPasswords] = useState([])
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchPasswords = async() => {
+      setPasswords(await passService.getAllPasswords())
+    }
+    fetchPasswords()
+  }, [])
 
   const handleLogout = () => {
     authService.logout()
     setUser(null)
     navigate('/')
   }
+  
+  console.log(passwords)
 
   const handleSignupOrLogin = () => {
     setUser(authService.getUser())
@@ -26,7 +37,7 @@ const App = () => {
     <div className='bg-slate-500 h-screen'>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Landing user={user} />} />
+        <Route path="/" element={<Landing user={user} passwords={passwords}/>} />
         <Route
           path="/signup"
           element={<Signup handleSignupOrLogin={handleSignupOrLogin} />}
