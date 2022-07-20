@@ -1,18 +1,18 @@
 const Landing = ({ user, passwords }) => {
 
   return (
-    <div className='text-center bg-slate-900'>
+    <div className='text-center bg-slate-900 h-screen'>
       <h1 className='pt-5 text-4xl font-thin text-slate-300'>{user ? 'hello ' + user.name + '.': 'please log in or create an account to continue...'}</h1>
       <h1 className='pb-5 text-3xl font-thin text-amber-500'>{user && 'your secrets are safe.'}</h1>
 
-      <div className="">
+      <div className="px-40">
         {
           passwords?
-          <div className="bg-blue-900 text-white font-2xl font-thin">
+          <div className="text-white font-2xl font-extralight">
             {
               passwords?.map((password, i) => (
-                <div id={i} className='text-center'>
-                  <div className={ i % 2 === 0 ? 'bg-blue-500 text-black py-3 hover:bg-slate-200': 'py-3 hover:bg-slate-200'}>
+                <div key={password._id} className='text-center m-1'>
+                  <div className={ i % 2 === 0 ? 'bg-blue-500 text-black py-3 hover:bg-slate-200 rounded-sm': 'bg-blue-900 py-3 hover:bg-slate-200 hover:text-slate-900 rounded-sm'}>
                     {password.site} {password.password}
                   </div>
                 </div>
@@ -21,7 +21,7 @@ const Landing = ({ user, passwords }) => {
           </div>
           :
           <div>
-            you dont have passwords
+            you dont have any passwords
           </div>
         }
       </div>

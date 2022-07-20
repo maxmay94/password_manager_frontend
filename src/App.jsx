@@ -8,6 +8,7 @@ import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
 import * as passService from './services/passService'
+import NewPassword from './pages/NewPassword/NewPassword'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
@@ -26,8 +27,8 @@ const App = () => {
     setUser(null)
     navigate('/')
   }
-  
-  console.log(passwords)
+
+  console.log('@App.jsx --> ',passwords)
 
   const handleSignupOrLogin = () => {
     setUser(authService.getUser())
@@ -57,6 +58,16 @@ const App = () => {
               <ChangePassword handleSignupOrLogin={handleSignupOrLogin} />
             ) : (
               <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/newPassword"
+          element={
+            user? (
+              <NewPassword />
+            ) : (
+              <Navigate to="/login"/>
             )
           }
         />
