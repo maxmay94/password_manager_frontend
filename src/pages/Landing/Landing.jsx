@@ -8,17 +8,18 @@ const Landing = ({ user, passwords }) => {
       <div className="px-40">
         {
           user&&
-          <div className="text-white font-2xl font-extralight">
-            {
-              passwords?.map((password, i) => (
-                <div key={password._id} className='text-center m-1'>
-                  <div className={ i % 2 === 0 ? 'bg-blue-500 text-black py-3 hover:bg-slate-200 rounded-sm': 'bg-blue-900 py-3 hover:bg-slate-200 hover:text-slate-900 rounded-sm'}>
-                    {password.site} {password.password}
+            passwords&&
+            <div className="text-white font-2xl font-extralight">
+              {
+                passwords?.map((password, i) => (
+                  <div key={password._id} className='text-center m-1'>
+                    <div className={ i % 2 === 0 ? 'bg-blue-500 text-black py-3 hover:bg-slate-200 rounded-sm': 'bg-blue-900 py-3 hover:bg-slate-200 hover:text-slate-900 rounded-sm'}>
+                      {password.site} {password.passW} {password.createdAt}
+                    </div>
                   </div>
-                </div>
-              ))
-            }
-          </div>
+                ))
+              }
+            </div>
         }
       </div>
     </div>

@@ -15,16 +15,10 @@ const App = () => {
   const [passwords, setPasswords] = useState([])
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchPasswords = async() => {
-      setPasswords(await passService.getAllPasswords())
-    }
-    fetchPasswords()
-  }, [])
-
   const handleLogout = () => {
     authService.logout()
     setUser(null)
+    setPasswords(null)
     navigate('/')
   }
 
@@ -32,6 +26,11 @@ const App = () => {
 
   const handleSignupOrLogin = () => {
     setUser(authService.getUser())
+
+    const fetchPasswords = async() => {
+      setPasswords(await passService.getAllPasswords())
+    }
+    fetchPasswords()
   }
 
   return (
