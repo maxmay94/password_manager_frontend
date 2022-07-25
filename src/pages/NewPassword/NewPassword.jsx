@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ChangePasswordForm from '../../components/ChangePasswordForm/ChangePasswordForm'
+import NewPasswordForm from '../../components/NewPasswordForm/NewPasswordForm'
 
 const NewPassword = props => {
   const [message, setMessage] = useState([''])
@@ -9,11 +9,11 @@ const NewPassword = props => {
   }
 
   return (
-    <main className="text-center">
-      <h1>New Password</h1>
+    <div className="text-center bg-slate-600">
+      <h1 className='m-4 text-3xl font-thin'>New Password</h1>
       <p>{message}</p>
-      <ChangePasswordForm {...props} updateMessage={updateMessage} />
-    </main>
+      <NewPasswordForm {...props} updateMessage={updateMessage} />
+    </div>
   )
 }
 
