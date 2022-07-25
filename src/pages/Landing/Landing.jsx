@@ -7,7 +7,7 @@ const Landing = ({ user, passwords }) => {
 
       <div className="px-40">
         {
-          passwords?
+          user&&
           <div className="text-white font-2xl font-extralight">
             {
               passwords?.map((password, i) => (
@@ -18,10 +18,6 @@ const Landing = ({ user, passwords }) => {
                 </div>
               ))
             }
-          </div>
-          :
-          <div>
-            you dont have any passwords
           </div>
         }
       </div>
