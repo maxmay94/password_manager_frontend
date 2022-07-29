@@ -20,7 +20,7 @@ const Landing = ({ user, passwords }) => {
                 ))
               }
             </div>
-        }
+        } 
       </div>
     </div>
   )

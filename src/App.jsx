@@ -20,16 +20,20 @@ const App = () => {
     setUser(null)
     setPasswords(null)
     navigate('/')
-  }
+  }  
 
   console.log('@App.jsx --> ',passwords)
 
+  const fetchPasswords = async() => {
+    setPasswords(await passService.getAllPasswords())
+  }
+
+  useEffect(() => {
+    fetchPasswords()
+  }, [])
+
   const handleSignupOrLogin = () => {
     setUser(authService.getUser())
-
-    const fetchPasswords = async() => {
-      setPasswords(await passService.getAllPasswords())
-    }
     fetchPasswords()
   }
 
