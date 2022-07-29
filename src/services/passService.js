@@ -16,4 +16,23 @@ const getAllPasswords = async() => {
   }
 }
 
-export { getAllPasswords }
+const addPassword = async(password) => {
+  try {
+    const res = await fetch(BASE_URL, {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${tokenService.getToken()}`
+      },
+      body: JSON.stringify(password)
+    })
+    return await res.json()
+  } catch(err) {
+    throw err
+  }
+}
+
+export { 
+  getAllPasswords, 
+  addPassword 
+}
