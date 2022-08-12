@@ -22,7 +22,7 @@ const NewPasswordForm = (props) => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      await passService.createPassword(formData)
+      await passService.addPassword(formData)
       // props.handleSignupOrLogin()
       navigate('/')
     } catch (err) {

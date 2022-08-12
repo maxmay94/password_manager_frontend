@@ -17,6 +17,7 @@ const getAllPasswords = async() => {
 
 const addPassword = async(password) => {
   try {
+    console.log('@!#%@#$^@#$%@#$% ',password)
     const res = await fetch(BASE_URL, {
       method: "POST",
       headers: {
@@ -31,16 +32,7 @@ const addPassword = async(password) => {
   }
 }
 
-const createPassword = async(password) => {
-  try {
-    console.log('@!#%@#$^@#$%@#$% ',password)
-  } catch(err) {
-    throw err
-  }
-}
-
 export { 
   getAllPasswords, 
   addPassword,
-  createPassword
 }
