@@ -31,7 +31,16 @@ const addPassword = async(password) => {
   }
 }
 
+const createPassword = async(password) => {
+  try {
+    console.log('@!#%@#$^@#$%@#$% ',password)
+  } catch(err) {
+    throw err
+  }
+}
+
 export { 
   getAllPasswords, 
-  addPassword 
+  addPassword,
+  createPassword
 }

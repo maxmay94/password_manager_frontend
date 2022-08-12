@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import * as authService from '../../services/authService'
+// import * as authService from '../../services/authService'
+import * as passService from '../../services/passService'
 
-const NewPasswordForm = props => {
+const NewPasswordForm = (props) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
+    siteName: '',
     pw: '',
-    newPw: '',
-    newPwConf: '',
+    pwConf: '',
   })
 
   const handleChange = e => {
@@ -21,18 +22,18 @@ const NewPasswordForm = props => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      await authService.changePassword(formData)
-      props.handleSignupOrLogin()
+      await passService.createPassword(formData)
+      // props.handleSignupOrLogin()
       navigate('/')
     } catch (err) {
       props.updateMessage(err.message)
     }
   }
 
-  const { pw, newPw, newPwConf } = formData
+  const { siteName, pw, pwConf } = formData
 
   const isFormInvalid = () => {
-    return !(pw && newPw && newPw === newPwConf)
+    return !(siteName && pw && pw === pwConf)
   }
 
   return (
@@ -46,11 +47,11 @@ const NewPasswordForm = props => {
           Site Name
         </label>
         <input
-          type="password"
+          type="text"
           autoComplete="off"
           id="password"
-          value={pw}
-          name="pw"
+          value={siteName}
+          name="siteName"
           onChange={handleChange}
         />
       </div>
@@ -62,8 +63,8 @@ const NewPasswordForm = props => {
           type="password"
           autoComplete="off"
           id="newPassword"
-          value={newPw}
-          name="newPw"
+          value={pw}
+          name="pw"
           onChange={handleChange}
         />
       </div>
@@ -75,8 +76,8 @@ const NewPasswordForm = props => {
           type="password"
           autoComplete="off"
           id="newPasswordConf"
-          value={newPwConf}
-          name="newPwConf"
+          value={pwConf}
+          name="pwConf"
           onChange={handleChange}
         />
       </div>
